@@ -2,6 +2,7 @@
 #include<iostream>
 #include <SFML/Graphics.hpp>
 #include<vector>
+#include<Windows.h>
 #include "Chip.h"
 #include "Dice.h"
 #include "Hint.h"
@@ -14,6 +15,8 @@ class Game
 	std::vector<Dice> dice;           // хранит массив кубиков
 	std::vector<Hint> hints;          // массив кружков подсказывающих возможные ходы
 	bool playingSide = true;          // переменная определяющая кто совершает ход игрок или компьютер
+	bool rollDice = false;            // переменная показывающая брошены ли кубики нужна для условия в рендере для изменеия playingSide
+	int endMove = 0;                  // переменная определяющая конец хода
 	sf::Event event;
 public:
 	Game();
@@ -23,10 +26,12 @@ private:
 	void update();
 	void render();
 	void startPosition();
-	bool movingChips();                         // функция перемещение фишек
-	void movingComp();                          // функция перемещение фишек компьютера
-	void rollOfDice();                          // функция бросок кубиков
-	bool playerToGo();                          // функция ход игрока
-	bool computerToGo();                        // функция ход компьютера
+	void movingChips();                                            // функция перемещение фишек
+	void movingComp();                                             // функция перемещение фишек компьютера
+	void rollOfDice();                                             // функция бросок кубиков
+	void playerToGo();                                             // функция ход игрока
+	void computerToGo();                                           // функция ход компьютера
+	void changingPositionsChips(int, int);                         // функция изменение позиций фишек создана для уменьшения кода в условиях хода компьютера
+	bool possibilityMoveComp(bool, std::vector<Dice>);             // проверка возможности хода компьютера
 };
 

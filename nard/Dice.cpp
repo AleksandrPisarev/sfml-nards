@@ -2,11 +2,11 @@
 Dice::Dice(int number)
 {
 	rectangle.setSize(sf::Vector2f(30, 30));
-	rectangle.setFillColor(sf::Color::White);
+	rectangle.setFillColor(sf::Color(255, 255, 255));
 	rectangle.setOrigin(rectangle.getSize().x / 2, rectangle.getSize().y / 2);
 	sf::CircleShape circle;
 	circle.setRadius(3);
-	circle.setFillColor(sf::Color::Black);
+	circle.setFillColor(sf::Color(0, 0, 0));
 	circle.setOrigin(circle.getRadius(), circle.getRadius());
 	for (int i = 0; i < number; i++) {
 		circles.push_back(circle);
@@ -114,4 +114,23 @@ void Dice::setPositionForComp(int offset)
 int Dice::getCircles()
 {
 	return circles.size();
+}
+
+bool Dice::getÑondition()
+{
+	return active;
+}
+
+void Dice::noMove()
+{
+	rectangle.setFillColor(sf::Color(255, 0, 0, 128));
+}
+
+void Dice::off()
+{
+	active = false;
+	rectangle.setFillColor(sf::Color(255, 255, 255, 128));
+	for (int i = 0; i < circles.size(); ++i) {
+		circles[i].setFillColor(sf::Color(0, 0, 0, 128));
+	}
 }
